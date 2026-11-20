@@ -4,6 +4,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: '30 3 * * *'   # nightly at 03:30 UTC
 
 jobs:
   test:
@@ -25,3 +27,10 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build -t shopflow-playwright-tests .
