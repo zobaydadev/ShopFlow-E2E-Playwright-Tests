@@ -11,7 +11,8 @@ End-to-end UI and API tests with Playwright and TypeScript.
 - Data-driven negative login tests
 - Separate `ui` and `api` Playwright projects
 - Screenshot and trace on failure, HTML report
-- CI on every push with GitHub Actions
+- CI on every push and a nightly scheduled run with GitHub Actions
+- Dockerfile based on the official Playwright image
 
 ## Structure
 ```
@@ -30,4 +31,10 @@ npm test              # everything
 npm run test:ui       # UI project only
 npm run test:api      # API project only
 npm run report        # open the HTML report
+```
+
+## Run with Docker
+```bash
+docker build -t shopflow-playwright-tests .
+docker run --rm --ipc=host shopflow-playwright-tests
 ```
